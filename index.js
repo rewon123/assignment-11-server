@@ -3,7 +3,7 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const app = express()
 const ObjectId = require('mongodb').ObjectId;
-const fileUpload = require('expressFileUpload');
+const fileUpload = require('express-fileUpload');
 
 app.use(bodyParser.json())
 app.use(cors());
