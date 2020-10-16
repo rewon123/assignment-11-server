@@ -88,14 +88,7 @@ client.connect(err => {
         res.send(result.insertedCount > 0)
       })
   })
-  app.post('/addAdmin', (req, res) => {
-    const orderDetails = req.body;
-    userRoles.insertOne(orderDetails)
-      .then(result => {
-        console.log(result.insertedCount);
-        res.send(result.insertedCount > 0)
-      })
-  })
+
 
 
 
