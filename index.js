@@ -101,6 +101,8 @@ client.connect(err => {
     const price = req.body.price;
     const service = req.body.service;
     const description = req.body.description;
+    const status = req.body.status;
+
     console.log("place service");
 
     const newImg = req.files.file.data;
@@ -111,7 +113,7 @@ client.connect(err => {
       img: Buffer.from(encImg, 'base64')
     }
 
-    orderCollection.insertOne({ name, email, price, service, description, file, image, img })
+    orderCollection.insertOne({ name, email, price, service, description, file, image, img,status })
       .then(result => {
         console.log(result);
         res.send(result.insertedCount > 0)
@@ -134,6 +136,18 @@ client.connect(err => {
       .then(result => {
         res.send(result.insertedCount > 0)
       })
+  })
+
+
+  // Update Status
+  app.patch('/update/:id', (req, res) => {
+    orderCollection.updateOne({_id: ObjectId(req.params.id)},
+    {
+        $set: {status: req.body.status}
+    })
+    .then(result => {
+        res.send(result.modifiedCount > 0);
+    })
   })
 
   // it will show on terminal when database is connected successfully
